@@ -17,7 +17,7 @@ def init():
     register_route(driver)
     host = str(driver.config.host)
     port = driver.config.port
-    if host in ["0.0.0.0", "127.0.0.1"]:
+    if host in {"0.0.0.0", "127.0.0.1"}:
         host = "localhost"
     logger.opt(colors=True).info(
         f"Nonebot docs will be running at: "

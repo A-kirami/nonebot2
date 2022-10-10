@@ -106,11 +106,7 @@ class Request:
 
         # headers
         self.headers: CIMultiDict[str]
-        if headers is not None:
-            self.headers = CIMultiDict(headers)
-        else:
-            self.headers = CIMultiDict()
-
+        self.headers = CIMultiDict(headers) if headers is not None else CIMultiDict()
         # cookies
         self.cookies = Cookies(cookies)
 
@@ -148,11 +144,7 @@ class Response:
 
         # headers
         self.headers: CIMultiDict[str]
-        if headers is not None:
-            self.headers = CIMultiDict(headers)
-        else:
-            self.headers = CIMultiDict()
-
+        self.headers = CIMultiDict(headers) if headers is not None else CIMultiDict()
         # body
         self.content: ContentTypes = content
 

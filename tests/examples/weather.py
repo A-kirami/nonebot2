@@ -9,8 +9,7 @@ weather = on_command("weather", rule=to_me(), aliases={"天气", "天气预报"}
 
 @weather.handle()
 async def handle_first_receive(matcher: Matcher, args: Message = CommandArg()):
-    plain_text = args.extract_plain_text()  # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
-    if plain_text:
+    if plain_text := args.extract_plain_text():
         matcher.set_arg("city", args)  # 如果用户发送了参数则直接赋值
 
 

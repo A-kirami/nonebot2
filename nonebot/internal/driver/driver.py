@@ -195,7 +195,6 @@ class ForwardMixin(abc.ABC):
     async def websocket(self, setup: Request) -> AsyncGenerator[WebSocket, None]:
         """发起一个 WebSocket 连接"""
         raise NotImplementedError
-        yield  # used for static type checking's generator detection
 
 
 class ForwardDriver(Driver, ForwardMixin):
