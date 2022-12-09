@@ -102,9 +102,10 @@ def test_message_getitem():
 
     assert message[0] == MessageSegment.text("test")
 
-    assert message[0:2] == Message(
+    assert message[:2] == Message(
         [MessageSegment.text("test"), MessageSegment.image("test2")]
     )
+
 
     assert message["image"] == Message(
         [MessageSegment.image("test2"), MessageSegment.image("test3")]

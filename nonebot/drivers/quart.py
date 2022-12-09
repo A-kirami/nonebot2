@@ -184,17 +184,15 @@ class Driver(ReverseDriver):
     async def _handle_http(self, setup: HTTPServerSetup) -> Response:
         request: Request = _request
 
-        json = None
-        if request.is_json:
-            json = await request.get_json()
-
+        json = await request.get_json() if request.is_json else None
         data = await request.form
         files_dict = await request.files
-        files: List[Tuple[str, FileTypes]] = []
         key: str
         value: FileStorage
-        for key, value in files_dict.items():
-            files.append((key, (value.filename, value.stream, value.content_type)))
+        files: List[Tuple[str, FileTypes]] = [
+            (key, (value.filename, value.stream, value.content_type))
+            for key, value in files_dict.items()
+        ]
 
         http_request = BaseRequest(
             request.method,

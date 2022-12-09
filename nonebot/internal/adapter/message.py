@@ -107,14 +107,16 @@ class Message(List[TMS], abc.ABC):
         super().__init__()
         if message is None:
             return
-        elif isinstance(message, str):
+        elif (
+            isinstance(message, str)
+            or not isinstance(message, MessageSegment)
+            and not isinstance(message, Iterable)
+        ):
             self.extend(self._construct(message))
         elif isinstance(message, MessageSegment):
             self.append(message)
-        elif isinstance(message, Iterable):
-            self.extend(message)
         else:
-            self.extend(self._construct(message))  # pragma: no cover
+            self.extend(message)
 
     @classmethod
     def template(cls: Type[TM], format_string: Union[str, TM]) -> MessageTemplate[TM]:
